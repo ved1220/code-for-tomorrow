@@ -1,0 +1,19 @@
+CREATE TABLE  categories(
+id INT AUTO_INCREMENT PRIMARY KEY,
+NAME VARCHAR(255) NOT NULL);
+
+CREATE TABLE services(
+id INT AUTO_INCREMENT PRIMARY KEY,
+category_id INT,
+name VARCHAR(255) NOT NULL,
+type ENUM ('Normal','VIP') NOT NULL,
+foreign KEY (category_id) REFERENCES
+categories(id) ON DELETE CASCADE);
+
+CREATE TABLE price_options(
+id INT AUTO_INCREMENT PRIMARY KEY,
+service_id INT,
+duration VARCHAR(100),
+price DECIMAL (10,2),
+type ENUM ('hourly','Weekly','Monthly'),
+FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE);
